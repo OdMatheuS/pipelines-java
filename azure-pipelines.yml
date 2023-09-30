@@ -1,4 +1,11 @@
 # Maven
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'Azure for Students(40e8f6d0-3344-46b2-b963-30ae2661fbae)'
+    appType: 'webAppLinux'
+    appName: 'java-app-fiap'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    runtimeStack: 'JAVA|17-java17'
 # Build your Java project and run tests with Apache Maven.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
@@ -10,7 +17,7 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: Maven@3
+- task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
@@ -18,5 +25,5 @@ steps:
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    testResultsFiles: '**/TEST-*.xml'
     goals: 'package'
